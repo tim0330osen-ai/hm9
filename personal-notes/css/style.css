@@ -1,0 +1,389 @@
+/* ==========================================================================
+   Notion 極簡風主題樣式 - personal-notes
+   ========================================================================== */
+
+:root {
+  --bg-main: #ffffff;
+  --bg-sidebar: #f7f6f3;
+  --bg-sidebar-hover: #ebeae6;
+  --bg-sidebar-active: #e3e2de;
+  --border-color: #e9e9e7;
+  --text-main: #37352f;
+  --text-muted: #787774;
+  --text-light: #9b9a97;
+  --code-bg: #f2f1ee;
+  --blockquote-border: #37352f;
+  --tag-bg: #eae8e3;
+  --tag-text: #454440;
+  --accent: #2e78d6;
+  --sidebar-width: 300px;
+}
+
+[data-theme="dark"] {
+  --bg-main: #191919;
+  --bg-sidebar: #202020;
+  --bg-sidebar-hover: #2c2c2c;
+  --bg-sidebar-active: #333333;
+  --border-color: #2f2f2f;
+  --text-main: #e6e6e5;
+  --text-muted: #9b9a97;
+  --text-light: #6a6966;
+  --code-bg: #262626;
+  --blockquote-border: #9b9a97;
+  --tag-bg: #2d2d2d;
+  --tag-text: #d4d3d0;
+  --accent: #5297ff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", Helvetica, Arial, sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-main);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   側邊欄 (Sidebar)
+   -------------------------------------------------------------------------- */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-header {
+  padding: 18px 20px 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.site-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-main);
+}
+
+.theme-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  transition: all 0.15s ease;
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--bg-sidebar-hover);
+  color: var(--text-main);
+}
+
+.search-container {
+  padding: 14px 20px 10px 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+}
+
+.tags-bar {
+  padding: 0 20px 12px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-btn {
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: none;
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.tag-btn.active {
+  background-color: var(--text-main);
+  color: var(--bg-main);
+}
+
+.tag-btn:hover {
+  opacity: 0.85;
+}
+
+.notes-nav {
+  flex: 1;
+  padding: 8px 12px;
+  overflow-y: auto;
+}
+
+.notes-section-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  padding: 8px 10px 4px 10px;
+  font-weight: 600;
+}
+
+.note-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  color: var(--text-main);
+}
+
+.note-item:hover {
+  background-color: var(--bg-sidebar-hover);
+}
+
+.note-item.active {
+  background-color: var(--bg-sidebar-active);
+  font-weight: 600;
+}
+
+.note-item-title {
+  font-size: 0.92rem;
+  line-height: 1.4;
+  margin-bottom: 3px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-item-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* --------------------------------------------------------------------------
+   主要閱讀區 (Main Content)
+   -------------------------------------------------------------------------- */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-inner {
+  max-width: 820px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 32px 96px 32px;
+}
+
+.mobile-bar {
+  display: none;
+  padding: 12px 16px;
+  background-color: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border-color);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--text-main);
+}
+
+/* --------------------------------------------------------------------------
+   Markdown 渲染樣式 (Notion 風格)
+   -------------------------------------------------------------------------- */
+.markdown-body {
+  color: var(--text-main);
+  font-size: 1.05rem;
+}
+
+.markdown-body h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.markdown-body h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 36px;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-color);
+  letter-spacing: -0.01em;
+}
+
+.markdown-body h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.markdown-body p {
+  margin-bottom: 14px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 24px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body hr {
+  height: 1px;
+  background-color: var(--border-color);
+  border: none;
+  margin: 32px 0;
+}
+
+.markdown-body blockquote {
+  border-left: 3px solid var(--blockquote-border);
+  padding: 6px 16px;
+  margin: 16px 0;
+  color: var(--text-muted);
+  background-color: var(--bg-sidebar);
+  border-radius: 0 6px 6px 0;
+}
+
+.markdown-body blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  background-color: var(--code-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #c7254e;
+}
+
+[data-theme="dark"] .markdown-body code {
+  color: #ff7597;
+}
+
+.markdown-body pre {
+  background-color: var(--code-bg);
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.markdown-body pre code {
+  background-color: transparent;
+  padding: 0;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.markdown-body th, .markdown-body td {
+  border: 1px solid var(--border-color);
+  padding: 8px 14px;
+  text-align: left;
+}
+
+.markdown-body th {
+  background-color: var(--bg-sidebar);
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   響應式設計 (Responsive)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .mobile-bar {
+    display: flex;
+  }
+
+  .sidebar {
+    position: fixed;
+    z-index: 1000;
+    transform: translateX(-100%);
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .content-inner {
+    padding: 24px 20px 60px 20px;
+  }
+}

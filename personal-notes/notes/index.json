@@ -1,0 +1,20 @@
+[
+  {
+    "id": "r-exercise-collection",
+    "title": "R 語言統計計算與程式設計練習題庫總覽",
+    "filename": "r-exercise-collection.md",
+    "tags": ["R語言", "統計學", "資料分析", "程式設計"],
+    "createdAt": "2026-11-16",
+    "updatedAt": "2026-11-16",
+    "summary": "整理國立政治大學統計學系吳漢銘老師之《R 練習題 (v2021.09)》，包含基礎物件、程式設計、繪圖、微積分線代、機率統計、資料處理與分析等九大單元目錄與重點架構。"
+  },
+  {
+    "id": "project-specification",
+    "title": "個人筆記整理網站規範與核心規劃",
+    "filename": "project-specification.md",
+    "tags": ["專案規範", "AGENTS"],
+    "createdAt": "2026-11-16",
+    "updatedAt": "2026-11-16",
+    "summary": "彙整個人筆記整理網站之專案目的、運作方式、技術限制與同主題合併原則。"
+  }
+]
